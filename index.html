@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Enaiat Music App</title>
 
@@ -10,65 +10,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
 
 :root{
     --pink:#ff3b91;
-    --pink2:#ff78b8;
-    --purple:#824cff;
-    --blue:#4f7cff;
-    --dark:#05040b;
-    --glass:rgba(255,255,255,.07);
+    --pink2:#ff82bb;
+    --purple:#7d4cff;
+    --blue:#4e7cff;
+    --bg:#05040b;
 }
 
 body{
     min-height:100vh;
-    color:white;
     font-family:Inter,Arial,sans-serif;
+    color:white;
     background:
-        radial-gradient(circle at 20% 10%,rgba(255,30,130,.18),transparent 30%),
-        radial-gradient(circle at 90% 25%,rgba(110,55,255,.18),transparent 32%),
-        radial-gradient(circle at 50% 100%,rgba(255,20,110,.14),transparent 35%),
-        #05040b;
+        radial-gradient(circle at 15% 10%,rgba(255,40,140,.20),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(100,50,255,.20),transparent 32%),
+        radial-gradient(circle at 50% 100%,rgba(255,30,120,.13),transparent 35%),
+        var(--bg);
     overflow-x:hidden;
 }
 
 /* BACKGROUND */
 
-body:before{
-    content:"";
+#stars{
     position:fixed;
     inset:0;
     pointer-events:none;
-    background:
-        radial-gradient(circle at 50% 40%,
-        rgba(255,60,150,.05),
-        transparent 40%);
-}
-
-.stars{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-1;
+    z-index:-2;
 }
 
 .star{
     position:absolute;
     width:2px;
     height:2px;
-    background:white;
     border-radius:50%;
+    background:white;
     opacity:.4;
     animation:twinkle 3s infinite alternate;
 }
 
 @keyframes twinkle{
-    from{opacity:.15}
+    from{opacity:.1}
     to{opacity:.8}
 }
 
@@ -77,16 +65,16 @@ body:before{
 .app{
     width:min(720px,100%);
     margin:auto;
-    padding:22px 16px 150px;
+    padding:22px 15px 150px;
 }
 
 /* HEADER */
 
 header{
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:25px;
+    justify-content:space-between;
+    margin-bottom:24px;
 }
 
 .brand{
@@ -102,10 +90,9 @@ header{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:25px;
+    font-size:24px;
     background:linear-gradient(135deg,var(--pink),var(--purple));
-    box-shadow:
-        0 10px 35px rgba(255,40,140,.35);
+    box-shadow:0 10px 35px rgba(255,40,140,.35);
 }
 
 .brand h1{
@@ -114,18 +101,19 @@ header{
 }
 
 .brand p{
-    color:#85818e;
-    font-size:10px;
     margin-top:4px;
+    color:#888390;
+    font-size:10px;
 }
 
 .header-button{
     width:45px;
     height:45px;
-    border:1px solid rgba(255,255,255,.1);
-    background:var(--glass);
-    color:white;
+    border:none;
     border-radius:50%;
+    color:white;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
     cursor:pointer;
     font-size:18px;
 }
@@ -136,8 +124,9 @@ header{
     position:relative;
     overflow:hidden;
     padding:32px 20px 25px;
+    text-align:center;
     border-radius:38px;
-    border:1px solid rgba(255,255,255,.11);
+    border:1px solid rgba(255,255,255,.12);
     background:
         linear-gradient(
             145deg,
@@ -148,7 +137,6 @@ header{
     box-shadow:
         0 35px 100px rgba(0,0,0,.55),
         inset 0 1px rgba(255,255,255,.08);
-    text-align:center;
 }
 
 .player:before{
@@ -156,65 +144,84 @@ header{
     position:absolute;
     width:300px;
     height:300px;
-    border-radius:50%;
-    background:var(--pink);
-    filter:blur(120px);
-    opacity:.12;
     top:-180px;
     left:50%;
     transform:translateX(-50%);
+    border-radius:50%;
+    background:var(--pink);
+    filter:blur(120px);
+    opacity:.13;
 }
 
 /* CD */
 
 .cd-area{
+    position:relative;
     width:300px;
     height:300px;
     margin:0 auto 28px;
-    position:relative;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+}
+
+.cd-glow{
+    position:absolute;
+    width:310px;
+    height:310px;
+    border-radius:50%;
+    border:1px solid rgba(255,80,170,.18);
+    box-shadow:0 0 40px rgba(255,50,150,.12);
+    animation:glow 2.5s ease-in-out infinite;
+}
+
+@keyframes glow{
+    0%,100%{
+        transform:scale(.97);
+        opacity:.4;
+    }
+    50%{
+        transform:scale(1.04);
+        opacity:1;
+    }
 }
 
 .cd{
+    position:relative;
     width:285px;
     height:285px;
     border-radius:50%;
-    position:relative;
 
     background:
         repeating-radial-gradient(
             circle,
-            rgba(255,255,255,.08) 0px,
-            rgba(255,255,255,.08) 1px,
+            rgba(255,255,255,.07) 0px,
+            rgba(255,255,255,.07) 1px,
             transparent 2px,
             transparent 5px
         ),
         conic-gradient(
-            #191927,
-            #754bff,
+            #171624,
+            #774cff,
             #ff3d91,
-            #262644,
-            #ff78b8,
-            #5536b8,
-            #191927
+            #24233c,
+            #ff72b1,
+            #5437bd,
+            #171624
         );
 
     box-shadow:
         0 25px 65px rgba(0,0,0,.7),
-        0 0 45px rgba(255,60,150,.18),
+        0 0 45px rgba(255,60,150,.2),
         inset 0 0 35px rgba(255,255,255,.1);
-
-    transition:.5s;
 }
 
 .cd:before{
     content:"";
     position:absolute;
-    inset:16px;
+    inset:15px;
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.2);
+    border:1px solid rgba(255,255,255,.18);
 }
 
 .cd:after{
@@ -226,65 +233,10 @@ header{
         linear-gradient(
             125deg,
             transparent 35%,
-            rgba(255,255,255,.28) 48%,
+            rgba(255,255,255,.3) 48%,
             transparent 55%
         );
-    opacity:.55;
-}
-
-/* CD LABEL */
-
-.cd-label{
-    position:absolute;
-    width:128px;
-    height:128px;
-    border-radius:50%;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            #ff9bca,
-            #ff3b91 35%,
-            #7c45ff 100%
-        );
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:
-        0 0 25px rgba(255,50,145,.35),
-        inset 0 0 20px rgba(255,255,255,.18);
-
-    z-index:2;
-}
-
-.cd-label-title{
-    font-size:15px;
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-.cd-label-created{
-    font-size:7px;
-    letter-spacing:1.5px;
-    margin-top:7px;
-    opacity:.8;
-    text-transform:uppercase;
-}
-
-.cd-hole{
-    position:absolute;
-    width:19px;
-    height:19px;
-    background:#090812;
-    border:3px solid rgba(255,255,255,.5);
-    border-radius:50%;
-    z-index:5;
+    opacity:.5;
 }
 
 .cd.playing{
@@ -297,29 +249,64 @@ header{
     }
 }
 
-/* CD LIGHT */
+/* CD LABEL */
 
-.cd-light{
+.cd-label{
     position:absolute;
-    width:340px;
-    height:340px;
+    width:128px;
+    height:128px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     border-radius:50%;
-    border:1px solid rgba(255,80,170,.12);
-    animation:pulse 2.5s ease-in-out infinite;
+    z-index:3;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            #ff9bca,
+            #ff3b91 38%,
+            #7845ff
+        );
+
+    box-shadow:
+        0 0 30px rgba(255,50,145,.35),
+        inset 0 0 20px rgba(255,255,255,.18);
 }
 
-@keyframes pulse{
-    0%,100%{
-        transform:scale(.96);
-        opacity:.4;
-    }
-    50%{
-        transform:scale(1.04);
-        opacity:.9;
-    }
+.cd-label-title{
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:1px;
 }
 
-/* SONG */
+.cd-label-created{
+    margin-top:7px;
+    font-size:7px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    opacity:.85;
+}
+
+.cd-hole{
+    position:absolute;
+    z-index:5;
+    width:18px;
+    height:18px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:#080711;
+    border:3px solid rgba(255,255,255,.5);
+}
+
+/* SONG INFO */
 
 .song-title{
     font-size:24px;
@@ -327,10 +314,10 @@ header{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    margin-bottom:7px;
 }
 
 .artist{
+    margin-top:7px;
     color:#9994a6;
     font-size:13px;
 }
@@ -343,12 +330,12 @@ header{
     justify-content:center;
     align-items:center;
     gap:4px;
-    margin:15px 0 4px;
+    margin:14px 0 4px;
 }
 
 .visualizer span{
     width:4px;
-    height:7px;
+    height:6px;
     border-radius:10px;
     background:linear-gradient(var(--pink),var(--purple));
 }
@@ -391,9 +378,9 @@ header{
 .time{
     display:flex;
     justify-content:space-between;
+    margin-top:7px;
     color:#777383;
     font-size:10px;
-    margin-top:7px;
 }
 
 /* CONTROLS */
@@ -402,7 +389,7 @@ header{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:24px;
+    gap:23px;
     margin:22px 0;
 }
 
@@ -427,14 +414,8 @@ header{
     width:67px;
     height:67px;
     border-radius:50%;
-    background:
-        linear-gradient(
-            135deg,
-            var(--pink),
-            var(--purple)
-        );
-    box-shadow:
-        0 12px 40px rgba(255,50,145,.42);
+    background:linear-gradient(135deg,var(--pink),var(--purple));
+    box-shadow:0 12px 40px rgba(255,50,145,.42);
     font-size:25px;
 }
 
@@ -457,10 +438,10 @@ header{
 
 .volume::-webkit-slider-thumb{
     appearance:none;
-    width:12px;
-    height:12px;
-    background:white;
+    width:13px;
+    height:13px;
     border-radius:50%;
+    background:white;
 }
 
 /* SEARCH */
@@ -472,12 +453,12 @@ header{
 .search{
     width:100%;
     height:50px;
+    padding:0 18px;
     border-radius:18px;
     border:1px solid rgba(255,255,255,.09);
+    outline:none;
     background:rgba(255,255,255,.055);
     color:white;
-    outline:none;
-    padding:0 18px;
     font-size:13px;
 }
 
@@ -485,25 +466,27 @@ header{
     color:#706c7b;
 }
 
-/* ADD */
+/* ADD MUSIC */
 
 .add{
-    margin-top:12px;
     width:100%;
-    min-height:75px;
-    border:1px dashed rgba(255,80,155,.35);
-    border-radius:22px;
-    background:rgba(255,55,140,.045);
+    min-height:78px;
+    margin-top:12px;
+    padding:15px;
     display:flex;
     justify-content:center;
     align-items:center;
     gap:12px;
+    border:1px dashed rgba(255,80,155,.4);
+    border-radius:22px;
+    background:rgba(255,55,140,.045);
     cursor:pointer;
 }
 
 .add-icon{
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
+    flex-shrink:0;
     border-radius:50%;
     display:flex;
     justify-content:center;
@@ -519,6 +502,12 @@ header{
 .add small{
     color:#777383;
     font-size:10px;
+}
+
+/* HIDDEN FILE INPUT */
+
+#fileInput{
+    display:none;
 }
 
 /* PLAYLIST */
@@ -550,18 +539,15 @@ header{
     align-items:center;
     gap:12px;
     padding:10px;
-    border-radius:18px;
     margin-bottom:8px;
+    border-radius:18px;
     background:rgba(255,255,255,.045);
     border:1px solid rgba(255,255,255,.05);
     cursor:pointer;
     transition:.25s;
 }
 
-.song:hover{
-    background:rgba(255,255,255,.08);
-}
-
+.song:hover,
 .song.active{
     background:rgba(255,55,140,.09);
     border-color:rgba(255,70,150,.25);
@@ -593,15 +579,15 @@ header{
 .song-name{
     font-size:13px;
     font-weight:600;
+    white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap;
 }
 
 .song-meta{
+    margin-top:5px;
     color:#777383;
     font-size:9px;
-    margin-top:5px;
 }
 
 .favorite{
@@ -616,20 +602,18 @@ header{
     color:#ff4b98;
 }
 
-/* EMPTY */
-
 .empty{
-    text-align:center;
     padding:35px;
+    text-align:center;
     color:#6f6b79;
 }
 
 .empty div{
-    font-size:38px;
     margin-bottom:10px;
+    font-size:38px;
 }
 
-/* MINI */
+/* MINI PLAYER */
 
 .mini{
     position:fixed;
@@ -638,20 +622,31 @@ header{
     left:50%;
     transform:translateX(-50%);
     width:min(680px,calc(100% - 22px));
+    padding:10px;
     display:flex;
     align-items:center;
     gap:10px;
-    padding:10px;
     border:1px solid rgba(255,255,255,.12);
     border-radius:22px;
-    background:rgba(12,10,20,.9);
+    background:rgba(12,10,20,.92);
     backdrop-filter:blur(25px);
     box-shadow:0 15px 50px rgba(0,0,0,.6);
 }
 
+.mini-disc{
+    width:43px;
+    height:43px;
+    flex-shrink:0;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,var(--pink),var(--purple));
+}
+
 .mini-info{
-    flex:1;
     min-width:0;
+    flex:1;
 }
 
 .mini-name{
@@ -663,16 +658,17 @@ header{
 }
 
 .mini-status{
+    margin-top:4px;
     color:#777383;
     font-size:9px;
-    margin-top:4px;
 }
 
 .mini-play{
     width:43px;
     height:43px;
-    border-radius:50%;
+    flex-shrink:0;
     border:none;
+    border-radius:50%;
     background:linear-gradient(135deg,var(--pink),var(--purple));
     color:white;
     cursor:pointer;
@@ -682,8 +678,8 @@ header{
 
 .note{
     position:fixed;
-    bottom:-30px;
     z-index:80;
+    bottom:-30px;
     pointer-events:none;
     animation:rise 4s linear forwards;
 }
@@ -706,24 +702,20 @@ header{
 
 .toast{
     position:fixed;
+    z-index:500;
     top:18px;
     left:50%;
     transform:translate(-50%,-120px);
-    background:rgba(25,21,35,.95);
-    border:1px solid rgba(255,255,255,.1);
     padding:12px 18px;
     border-radius:30px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(25,21,35,.96);
     font-size:12px;
-    z-index:500;
     transition:.4s;
 }
 
 .toast.show{
     transform:translate(-50%,0);
-}
-
-input[type=file]{
-    display:none;
 }
 
 /* MOBILE */
@@ -745,13 +737,13 @@ input[type=file]{
         height:112px;
     }
 
-    .cd-light{
-        width:290px;
-        height:290px;
+    .cd-glow{
+        width:285px;
+        height:285px;
     }
 
     .controls{
-        gap:18px;
+        gap:17px;
     }
 
     .play{
@@ -764,14 +756,19 @@ input[type=file]{
 
 <body>
 
-<div class="stars" id="stars"></div>
+<div id="stars"></div>
 
 <div class="toast" id="toast"></div>
 
+<!--
+IMPORTANT:
+This accepts MP3 and common iPhone audio formats.
+"multiple" lets you choose several files at once.
+-->
 <input
     type="file"
     id="fileInput"
-    accept="audio/*"
+    accept=".mp3,audio/mpeg,audio/mp4,audio/x-m4a,audio/wav,audio/wave"
     multiple
 >
 
@@ -786,8 +783,15 @@ input[type=file]{
         </div>
 
         <div>
-            <h1>Enaiat Music</h1>
-            <p>Music made with memories ❤️</p>
+
+            <h1>
+                Enaiat Music
+            </h1>
+
+            <p>
+                Music made with memories ❤️
+            </p>
+
         </div>
 
     </div>
@@ -801,13 +805,13 @@ input[type=file]{
 </header>
 
 
-<section class="player">
+<!-- PLAYER -->
 
-    <!-- CD -->
+<section class="player">
 
     <div class="cd-area">
 
-        <div class="cd-light"></div>
+        <div class="cd-glow"></div>
 
         <div class="cd" id="cd">
 
@@ -833,13 +837,18 @@ input[type=file]{
     <div
         class="song-title"
         id="songTitle">
+
         Welcome to Enaiat Music
+
     </div>
+
 
     <div
         class="artist"
         id="artist">
+
         Add your favorite songs ❤️
+
     </div>
 
 
@@ -863,9 +872,9 @@ input[type=file]{
     <!-- PROGRESS -->
 
     <input
-        type="range"
         class="progress"
         id="progress"
+        type="range"
         min="0"
         max="100"
         value="0"
@@ -935,8 +944,8 @@ input[type=file]{
             type="range"
             min="0"
             max="1"
-            step=".01"
-            value=".8"
+            step="0.01"
+            value="0.8"
         >
 
     </div>
@@ -944,7 +953,7 @@ input[type=file]{
 </section>
 
 
-<!-- SEARCH / ADD -->
+<!-- SEARCH -->
 
 <section class="search-area">
 
@@ -952,8 +961,11 @@ input[type=file]{
         class="search"
         id="search"
         type="search"
-        placeholder="🔎  Search your music..."
+        placeholder="🔎 Search your music..."
     >
+
+
+    <!-- ADD MUSIC BUTTON -->
 
     <label
         class="add"
@@ -964,15 +976,17 @@ input[type=file]{
         </div>
 
         <div>
+
             <strong>
-                Add Music From Your Phone
+                Add MP3 Music From Files
             </strong>
 
             <br>
 
             <small>
-                Select one or many songs
+                Select one or many MP3 files
             </small>
+
         </div>
 
     </label>
@@ -993,10 +1007,13 @@ input[type=file]{
         <button
             class="clear"
             id="clear">
+
             Clear
+
         </button>
 
     </div>
+
 
     <div id="songList">
 
@@ -1006,7 +1023,7 @@ input[type=file]{
                 💿
             </div>
 
-            Add your first song
+            Add your first MP3 song
 
         </div>
 
@@ -1021,15 +1038,7 @@ input[type=file]{
 
 <div class="mini">
 
-    <div style="
-        width:43px;
-        height:43px;
-        border-radius:50%;
-        background:linear-gradient(135deg,#ff3b91,#824cff);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:18px;">
+    <div class="mini-disc">
         💿
     </div>
 
@@ -1038,13 +1047,17 @@ input[type=file]{
         <div
             class="mini-name"
             id="miniName">
+
             Enaiat Music
+
         </div>
 
         <div
             class="mini-status"
             id="miniStatus">
+
             Ready to play
+
         </div>
 
     </div>
@@ -1052,7 +1065,9 @@ input[type=file]{
     <button
         class="mini-play"
         id="miniPlay">
+
         ▶
+
     </button>
 
 </div>
@@ -1064,7 +1079,7 @@ input[type=file]{
 <script>
 
 /* =====================================================
-   ENAIAT MUSIC
+   ELEMENTS
 ===================================================== */
 
 const audio =
@@ -1137,19 +1152,23 @@ const toast =
     document.getElementById("toast");
 
 
+/* =====================================================
+   STATE
+===================================================== */
+
 let songs = [];
 let current = -1;
 
 let shuffleMode = false;
 let repeatMode = false;
 
-let urls = {};
+let noteTimer = null;
 
-audio.volume = .8;
+audio.volume = 0.8;
 
 
 /* =====================================================
-   STARS
+   CREATE STARS
 ===================================================== */
 
 const stars =
@@ -1160,7 +1179,7 @@ for(let i=0;i<100;i++){
     const star =
         document.createElement("div");
 
-    star.className = "star";
+    star.className="star";
 
     star.style.left =
         Math.random()*100+"%";
@@ -1172,6 +1191,7 @@ for(let i=0;i<100;i++){
         Math.random()*3+"s";
 
     stars.appendChild(star);
+
 }
 
 
@@ -1179,41 +1199,47 @@ for(let i=0;i<100;i++){
    TOAST
 ===================================================== */
 
-function showToast(text){
+function showToast(message){
 
-    toast.textContent = text;
+    toast.textContent =
+        message;
 
     toast.classList.add("show");
 
-    setTimeout(()=>{
-        toast.classList.remove("show");
-    },2200);
+    setTimeout(
+        ()=>{
+            toast.classList.remove("show");
+        },
+        2200
+    );
+
 }
 
 
 /* =====================================================
-   TIME
+   FORMAT TIME
 ===================================================== */
 
-function timeFormat(seconds){
+function formatTime(seconds){
 
     if(!Number.isFinite(seconds))
         return "0:00";
 
-    const m =
+    const minutes =
         Math.floor(seconds/60);
 
-    const s =
+    const secondsPart =
         Math.floor(seconds%60)
         .toString()
         .padStart(2,"0");
 
-    return m+":"+s;
+    return minutes + ":" + secondsPart;
+
 }
 
 
 /* =====================================================
-   NAME
+   CLEAN FILE NAME
 ===================================================== */
 
 function cleanName(name){
@@ -1227,7 +1253,7 @@ function cleanName(name){
 
 
 /* =====================================================
-   ADD SONGS
+   ADD FILES
 ===================================================== */
 
 fileInput.addEventListener(
@@ -1240,41 +1266,81 @@ fileInput.addEventListener(
         if(!files.length)
             return;
 
+
+        let added = 0;
+
+
         files.forEach(file=>{
 
-            if(!file.type.startsWith("audio/"))
+            /*
+             * Some iPhones may return an empty
+             * MIME type, so we also check .mp3.
+             */
+
+            const isAudio =
+                file.type.startsWith("audio/") ||
+                file.name.toLowerCase().endsWith(".mp3") ||
+                file.name.toLowerCase().endsWith(".m4a") ||
+                file.name.toLowerCase().endsWith(".wav");
+
+            if(!isAudio)
                 return;
 
-            const id =
-                Date.now()+Math.random();
 
-            urls[id] =
+            const url =
                 URL.createObjectURL(file);
 
-            songs.push({
 
-                id:id,
+            songs.push({
 
                 name:
                     cleanName(file.name),
 
                 url:
-                    urls[id],
+                    url,
 
                 favorite:false
 
             });
 
+
+            added++;
+
         });
+
 
         render();
 
-        showToast(
-            "Music added to Enaiat Music ❤️"
-        );
 
-        if(current===-1)
-            load(0);
+        if(added>0){
+
+            showToast(
+                added === 1
+                ? "MP3 added 🎵"
+                : added+" songs added 🎵"
+            );
+
+        }else{
+
+            showToast(
+                "No supported audio files found"
+            );
+
+        }
+
+
+        if(current===-1 && songs.length){
+
+            loadSong(0);
+
+        }
+
+
+        /*
+         * Important on iPhone:
+         * resetting the input lets you choose
+         * the same file again later.
+         */
 
         this.value="";
 
@@ -1283,10 +1349,10 @@ fileInput.addEventListener(
 
 
 /* =====================================================
-   LOAD
+   LOAD SONG
 ===================================================== */
 
-function load(index){
+function loadSong(index){
 
     if(!songs.length)
         return;
@@ -1297,31 +1363,42 @@ function load(index){
     if(index>=songs.length)
         index=0;
 
+
     current=index;
+
 
     const song =
         songs[current];
 
+
     audio.src =
         song.url;
+
 
     songTitle.textContent =
         song.name;
 
+
     artist.textContent =
         "Created by Enaiat ❤️";
+
 
     miniName.textContent =
         song.name;
 
+
     miniStatus.textContent =
         "Ready to play";
 
+
     progress.value=0;
 
-    currentTime.textContent="0:00";
+    currentTime.textContent =
+        "0:00";
 
-    duration.textContent="0:00";
+    duration.textContent =
+        "0:00";
+
 
     render();
 
@@ -1329,7 +1406,7 @@ function load(index){
 
 
 /* =====================================================
-   PLAY
+   PLAY / PAUSE
 ===================================================== */
 
 async function togglePlay(){
@@ -1337,23 +1414,31 @@ async function togglePlay(){
     if(!songs.length){
 
         showToast(
-            "Add music first 🎵"
+            "Add an MP3 first 🎵"
         );
 
         return;
+
     }
 
-    if(current===-1)
-        load(0);
+
+    if(current===-1){
+
+        loadSong(0);
+
+    }
+
 
     if(audio.paused){
 
         try{
+
             await audio.play();
-        }catch(e){
+
+        }catch(error){
 
             showToast(
-                "Tap play again 🎵"
+                "Tap Play again to start 🎵"
             );
 
         }
@@ -1375,17 +1460,29 @@ audio.addEventListener(
     "play",
     ()=>{
 
-        playButton.textContent="⏸";
-        miniPlay.textContent="⏸";
+        playButton.textContent =
+            "⏸";
 
-        cd.classList.add("playing");
+        miniPlay.textContent =
+            "⏸";
 
-        visualizer.classList.add("playing");
 
-        miniStatus.textContent=
+        cd.classList.add(
+            "playing"
+        );
+
+
+        visualizer.classList.add(
+            "playing"
+        );
+
+
+        miniStatus.textContent =
             "Playing now";
 
-        startNotes();
+
+        startFloatingNotes();
+
 
         render();
 
@@ -1401,16 +1498,26 @@ audio.addEventListener(
     "pause",
     ()=>{
 
-        playButton.textContent="▶";
-        miniPlay.textContent="▶";
+        playButton.textContent =
+            "▶";
 
-        cd.classList.remove("playing");
+        miniPlay.textContent =
+            "▶";
+
+
+        cd.classList.remove(
+            "playing"
+        );
+
 
         visualizer.classList.remove(
             "playing"
         );
 
-        miniStatus.textContent="Paused";
+
+        miniStatus.textContent =
+            "Paused";
+
 
         clearInterval(noteTimer);
 
@@ -1419,7 +1526,7 @@ audio.addEventListener(
 
 
 /* =====================================================
-   TIME UPDATE
+   PROGRESS
 ===================================================== */
 
 audio.addEventListener(
@@ -1429,17 +1536,20 @@ audio.addEventListener(
         if(!audio.duration)
             return;
 
+
         progress.value =
-            audio.currentTime /
-            audio.duration * 100;
+            (audio.currentTime /
+            audio.duration) * 100;
+
 
         currentTime.textContent =
-            timeFormat(
+            formatTime(
                 audio.currentTime
             );
 
+
         duration.textContent =
-            timeFormat(
+            formatTime(
                 audio.duration
             );
 
@@ -1458,8 +1568,9 @@ progress.addEventListener(
         if(!audio.duration)
             return;
 
+
         audio.currentTime =
-            progress.value/100 *
+            (progress.value / 100) *
             audio.duration;
 
     }
@@ -1475,21 +1586,28 @@ volume.addEventListener(
     ()=>{
 
         audio.volume =
-            volume.value;
+            Number(volume.value);
+
 
         const icon =
             document.getElementById(
                 "volumeIcon"
             );
 
-        if(audio.volume===0)
+
+        if(audio.volume===0){
+
             icon.textContent="🔇";
 
-        else if(audio.volume<.5)
+        }else if(audio.volume<0.5){
+
             icon.textContent="🔉";
 
-        else
+        }else{
+
             icon.textContent="🔊";
+
+        }
 
     }
 );
@@ -1504,7 +1622,9 @@ function nextSong(){
     if(!songs.length)
         return;
 
+
     let nextIndex;
+
 
     if(shuffleMode){
 
@@ -1530,14 +1650,19 @@ function nextSong(){
 
     }else{
 
-        nextIndex=current+1;
+        nextIndex =
+            current+1;
 
-        if(nextIndex>=songs.length)
+        if(nextIndex>=songs.length){
+
             nextIndex=0;
+
+        }
 
     }
 
-    load(nextIndex);
+
+    loadSong(nextIndex);
 
     audio.play();
 
@@ -1553,12 +1678,16 @@ function previousSong(){
     if(!songs.length)
         return;
 
-    let index=current-1;
+
+    let index =
+        current-1;
+
 
     if(index<0)
         index=songs.length-1;
 
-    load(index);
+
+    loadSong(index);
 
     audio.play();
 
@@ -1566,7 +1695,7 @@ function previousSong(){
 
 
 /* =====================================================
-   ENDED
+   SONG ENDED
 ===================================================== */
 
 audio.addEventListener(
@@ -1615,15 +1744,18 @@ function toggleShuffle(){
     shuffleMode =
         !shuffleMode;
 
+
     shuffle.classList.toggle(
         "active",
         shuffleMode
     );
 
+
     shuffleTop.classList.toggle(
         "active",
         shuffleMode
     );
+
 
     showToast(
         shuffleMode
@@ -1632,6 +1764,7 @@ function toggleShuffle(){
     );
 
 }
+
 
 shuffle.onclick =
     toggleShuffle;
@@ -1650,10 +1783,12 @@ repeat.onclick =
         repeatMode =
             !repeatMode;
 
+
         repeat.classList.toggle(
             "active",
             repeatMode
         );
+
 
         showToast(
             repeatMode
@@ -1665,7 +1800,17 @@ repeat.onclick =
 
 
 /* =====================================================
-   RENDER
+   SEARCH
+===================================================== */
+
+search.addEventListener(
+    "input",
+    render
+);
+
+
+/* =====================================================
+   RENDER PLAYLIST
 ===================================================== */
 
 function render(){
@@ -1675,6 +1820,7 @@ function render(){
         .toLowerCase()
         .trim();
 
+
     const filtered =
         songs.filter(
             song =>
@@ -1683,9 +1829,10 @@ function render(){
             .includes(query)
         );
 
+
     if(!filtered.length){
 
-        songList.innerHTML=`
+        songList.innerHTML = `
 
             <div class="empty">
 
@@ -1694,7 +1841,7 @@ function render(){
                 ${
                     songs.length
                     ? "No music found"
-                    : "Add your first song"
+                    : "Add your first MP3 song"
                 }
 
             </div>
@@ -1702,43 +1849,53 @@ function render(){
         `;
 
         return;
+
     }
+
 
     songList.innerHTML="";
 
+
     filtered.forEach(
-        (song,index)=>{
+        song=>{
 
             const realIndex =
                 songs.indexOf(song);
+
 
             const row =
                 document.createElement(
                     "div"
                 );
 
+
             row.className =
-                "song "+
+                "song " +
                 (
                     realIndex===current
                     ? "active"
                     : ""
                 );
 
-            row.innerHTML=`
+
+            row.innerHTML = `
 
                 <div class="song-number">
+
                     ${
                         realIndex===current &&
                         !audio.paused
                         ? "▶"
                         : realIndex+1
                     }
+
                 </div>
+
 
                 <div class="song-icon">
                     💿
                 </div>
+
 
                 <div class="song-info">
 
@@ -1747,15 +1904,18 @@ function render(){
                     </div>
 
                     <div class="song-meta">
+
                         ${
                             realIndex===current &&
                             !audio.paused
                             ? "Playing now"
                             : "Enaiat Music"
                         }
+
                     </div>
 
                 </div>
+
 
                 <button
                     class="favorite ${
@@ -1771,12 +1931,13 @@ function render(){
                     }
 
                 </button>
+
             `;
 
 
             row.onclick =
                 ()=>{
-                    load(realIndex);
+                    loadSong(realIndex);
                     audio.play();
                 };
 
@@ -1796,7 +1957,9 @@ function render(){
                 };
 
 
-            songList.appendChild(row);
+            songList.appendChild(
+                row
+            );
 
         }
     );
@@ -1805,7 +1968,7 @@ function render(){
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(text){
@@ -1821,17 +1984,7 @@ function escapeHTML(text){
 
 
 /* =====================================================
-   SEARCH
-===================================================== */
-
-search.addEventListener(
-    "input",
-    render
-);
-
-
-/* =====================================================
-   CLEAR
+   CLEAR PLAYLIST
 ===================================================== */
 
 clear.onclick =
@@ -1840,44 +1993,53 @@ clear.onclick =
         if(!songs.length)
             return;
 
-        if(
-            !confirm(
-                "Remove all songs?"
-            )
-        )
+
+        if(!confirm(
+            "Remove all songs?"
+        ))
             return;
+
 
         audio.pause();
 
-        Object.values(urls)
-            .forEach(
-                url =>
-                URL.revokeObjectURL(url)
-            );
 
-        urls={};
+        songs.forEach(
+            song=>{
+                URL.revokeObjectURL(
+                    song.url
+                );
+            }
+        );
+
 
         songs=[];
 
         current=-1;
 
+
         audio.removeAttribute(
             "src"
         );
 
+
         songTitle.textContent =
             "Welcome to Enaiat Music";
+
 
         artist.textContent =
             "Add your favorite songs ❤️";
 
+
         miniName.textContent =
             "Enaiat Music";
+
 
         miniStatus.textContent =
             "Ready to play";
 
+
         render();
+
 
         showToast(
             "Playlist cleared"
@@ -1887,12 +2049,10 @@ clear.onclick =
 
 
 /* =====================================================
-   FLOATING NOTES
+   FLOATING MUSIC NOTES
 ===================================================== */
 
-let noteTimer;
-
-const noteSymbols=[
+const symbols=[
     "♪",
     "♫",
     "♬",
@@ -1902,42 +2062,50 @@ const noteSymbols=[
     "✨"
 ];
 
+
 function createNote(){
 
     if(audio.paused)
         return;
+
 
     const note =
         document.createElement(
             "div"
         );
 
+
     note.className="note";
 
+
     note.textContent =
-        noteSymbols[
+        symbols[
             Math.floor(
                 Math.random()*
-                noteSymbols.length
+                symbols.length
             )
         ];
 
+
     note.style.left =
         Math.random()*95+"vw";
+
 
     note.style.color =
         Math.random()>.5
         ? "#ff5b9f"
         : "#9970ff";
 
+
     note.style.fontSize =
-        14+
-        Math.random()*18+
-        "px";
+        (14+
+        Math.random()*18)+"px";
+
 
     document.body.appendChild(
         note
     );
+
 
     setTimeout(
         ()=>{
@@ -1948,9 +2116,13 @@ function createNote(){
 
 }
 
-function startNotes(){
 
-    clearInterval(noteTimer);
+function startFloatingNotes(){
+
+    clearInterval(
+        noteTimer
+    );
+
 
     noteTimer =
         setInterval(
@@ -1962,7 +2134,7 @@ function startNotes(){
 
 
 /* =====================================================
-   START
+   INITIALIZE
 ===================================================== */
 
 render();
